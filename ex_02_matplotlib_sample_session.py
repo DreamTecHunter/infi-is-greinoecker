@@ -47,7 +47,7 @@ plt.show()
 
 # 1.1   years 1979, 1993, 2006, 2020 (deltas in years: +14, +13, +14)
 
-temp = d[:, 5]#
+temp = d[:, 5]  #
 # temp = [item for item in d[:, 5] if not np.isnan(item)]
 # temp[np.isnan(temp)] = None  # list contained nan-values (nav-values appear when no number  or another type is given )
 temp1979 = clear_nan(temp[year == 1979])
@@ -59,3 +59,16 @@ plt.close()
 plt.boxplot([temp1979, temp1993, temp2006, temp2020])
 plt.xticks([1, 2, 3, 4], ["1979", "1993", "2006", "2020"])
 plt.show()
+
+# 1.2
+plt.close()
+plt.plot(temp2020, "b.")
+plt.show()
+
+# 1.3
+
+
+# 1.4
+
+
+# 1.5
