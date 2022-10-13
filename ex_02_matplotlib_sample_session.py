@@ -1,9 +1,13 @@
+import copy
+
+import numpy
 import numpy as np
 from matplotlib import pyplot as plt
 
 
 def clear_nan(values: list):
-    return [item for item in values if not np.isnan(item)]
+    return values[~np.isnan(values)]
+#    return [item for item in values if not np.isnan(item)]
 
 
 # source: https://www.kaggle.com/datasets/emmanuelfwerr/london-weather-data
@@ -66,7 +70,12 @@ plt.plot(temp2020, "b.")
 plt.show()
 
 # 1.3
-
+plt.close()
+years = [y for y in range(year[0], year[-1])]
+temps = [clear_nan(temp[year == y]) for y in years]
+plt.boxplot(temps)
+plt.xticks([i for i in range(len(years))], years)
+plt.show()
 
 # 1.4
 
