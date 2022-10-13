@@ -7,6 +7,8 @@ from matplotlib import pyplot as plt
 
 def clear_nan(values: list):
     return values[~np.isnan(values)]
+
+
 #    return [item for item in values if not np.isnan(item)]
 
 
@@ -78,6 +80,14 @@ plt.xticks([i for i in range(len(years))], years)
 plt.show()
 
 # 1.4
-
+plt.close()
+last_10_temp = [temp[year == y] for y in range(year[-1] - 10, year[-1])]
+filtered_last_10_temp = [l10t[~np.isnan(l10t)] for l10t in last_10_temp]
+average_last_10_temp = [sum(fl10t) / len(fl10t) for fl10t in filtered_last_10_temp]
+plt.bar([y for y in range(year[-1] - 10, year[-1])], average_last_10_temp)
+plt.xlabel("years")
+plt.ylabel("average temperature")
+plt.show()
+print("")
 
 # 1.5
