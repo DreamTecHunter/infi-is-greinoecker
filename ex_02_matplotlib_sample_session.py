@@ -82,7 +82,7 @@ plt.show()
 # 1.4
 plt.close()
 last_10_temp = [temp[year == y] for y in range(year[-1] - 10, year[-1])]
-filtered_last_10_temp = [l10t[~np.isnan(l10t)] for l10t in last_10_temp]
+filtered_last_10_temp = [clear_nan(l10t) for l10t in last_10_temp]
 average_last_10_temp = [sum(fl10t) / len(fl10t) for fl10t in filtered_last_10_temp]
 plt.bar([y for y in range(year[-1] - 10, year[-1])], average_last_10_temp)
 plt.xlabel("years")
@@ -90,4 +90,13 @@ plt.ylabel("average temperature")
 plt.show()
 print("")
 
-# 1.5
+# 1.5   Zeige die duchschnittlichen Temperatur der ganzen Jahre auf die Monate aufgeteilt in einem Liniendiagramm mit hervorgehobenen Punkten.
+plt.close()
+monthly_temp = [temp[month == m + 1] for m in range(12)]
+filtered_monthly_temp = [clear_nan(mt) for mt in monthly_temp]
+average_monthly_temp = [sum(fmt) / len(fmt) for fmt in filtered_monthly_temp]
+plt.plot([m + 1 for m in range(12)], average_monthly_temp, color='green')
+plt.scatter([m + 1 for m in range(12)], average_monthly_temp, color='red')
+plt.xlabel("month")
+plt.ylabel("average temperature")
+plt.show()
