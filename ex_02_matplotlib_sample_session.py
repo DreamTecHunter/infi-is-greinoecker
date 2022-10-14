@@ -11,7 +11,6 @@ def clear_nan(values: list):
 
 #    return [item for item in values if not np.isnan(item)]
 
-
 # source: https://www.kaggle.com/datasets/emmanuelfwerr/london-weather-data
 d = np.genfromtxt('data/london_weather.csv', delimiter=",", skip_header=1)
 print(d)
@@ -51,9 +50,20 @@ plt.plot(sun1979, "r.")
 plt.plot(sun2020, "g.")
 plt.show()
 
-# 1.1   years 1979, 1993, 2006, 2020 (deltas in years: +14, +13, +14)
+# plausibilitätsanalyse
+temp = d[:, 5]
+print("temp\tmin:" + str(min(temp)) + "\tmax:" + str(max(temp)))
+plt.close()
+plt.boxplot(clear_nan(temp))
+plt.show()
+plt.close()
+temp1979 = clear_nan(temp[year == 1979])
+temp2020 = clear_nan(temp[year == 2020])
+plt.boxplot([temp1979,temp2020])
+plt.xticks([1,2], ["1979", "2020"])
+plt.show()
 
-temp = d[:, 5]  #
+# 1.1   years 1979, 1993, 2006, 2020 (deltas in years: +14, +13, +14)
 # temp = [item for item in d[:, 5] if not np.isnan(item)]
 # temp[np.isnan(temp)] = None  # list contained nan-values (nav-values appear when no number  or another type is given )
 temp1979 = clear_nan(temp[year == 1979])
@@ -76,7 +86,7 @@ plt.close()
 years = [y for y in range(year[0], year[-1])]
 temps = [clear_nan(temp[year == y]) for y in years]
 plt.boxplot(temps)
-plt.xticks([i for i in range(len(years))], years)
+plt.xticks([i for i in range(len(years))], years, rotation=90)
 plt.show()
 
 # 1.4
