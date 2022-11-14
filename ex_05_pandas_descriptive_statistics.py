@@ -38,36 +38,4 @@ pd.set_option('display.expand_frame_repr', False) # So werden alle Spalten angez
 # Zählen der Bezirke
 # print(df.groupby('Bezirk')['Bezirk'].count())
 
-# Aggregieren von (mehreren) Spalten
-#print(df.groupby('Bezirk').agg(sum1993 = ('j1993', 'sum'), sum1994 = ('j1994', 'sum')))
-#print(df.groupby('Bezirk').sum()) # Wendet die Summe auf alle Spalten an
-# Somit können auch Spalten drin sein, die man nicht haben möchte (z.B. Gemnr)
-bez_sum = df.groupby('Bezirk').sum()
-bez_sum = bez_sum.loc[:, bez_sum.columns != 'Gemnr']
-#print("Jetzt ohne der Gemeinde:")
-#print(bez_sum)
-# Aufsummieren von Spalten
-nr_cols = df.iloc[:,3:]
-#print(nr_cols.sum())
 
-# Aufsummieren von Zeilen
-row_sum = nr_cols.sum(axis=1)
-df['sum_all'] = row_sum
-
-# print(df.head())
-
-# Auswahl einzelner Zeilen
-df_il = df.loc[df.Bezirk == 'IL'] # Nur Innsbruck - Land
-#print(df_il)
-
-# Erste Plots
-#Die Entwicklung der tiroler Gesamtbevölkerung über die Jahre
-# plt.plot(nr_cols.sum())
-# plt.xticks(rotation=90)
-# plt.show()
-
-df = df.drop(columns='Gemnr') # So kann man eine Spalte (oder mehrere wegschmeissen)
-
-# Sortieren nach einer (oder mehreren) Spalten
-df_high = df.sort_values('j1993', ascending=False)
-#print(df_high.head())
